@@ -1,38 +1,43 @@
 #include <iostream>
 using namespace std;
 
-int globalcallcount = 0;
+// Global variable to store call count
+int globalCallCount = 0;
 
-void countfuncglobal(){
-    globalcallcount++;
-    cout<<"Global: I have been called "<< globalcallcount<<" times" <<endl;
+// Function that uses a global variable to count function calls
+void countFuncGlobal() {
+    globalCallCount++;
+    cout << "Global: I have been called " << globalCallCount << " times" << endl;
 }
 
-void countfuncstatic(){
-    static int staticcallcount = 0;
-    staticcallcount++;
-    cout<<"static: I have been called "<<staticcallcount<<" times"<<endl;
-
+// Function that uses a static local variable to count function calls
+void countFuncStatic() {
+    static int staticCallCount = 0;
+    staticCallCount++;
+    cout << "Static: I have been called " << staticCallCount << " times" << endl;
 }
 
-int main(){
-    cout<<"Calling Global Count Function"<<endl;
-    for (int i=0; i<10;i++){
-        countfuncglobal();
+int main() {
+    cout << "Calling Global Count Function" << endl;
+    for (int i = 0; i < 10; i++) {
+        countFuncGlobal();
     }
 
-    cout<<"Calling Global Count Function"<<endl;
-    for (int i=0; i<10;i++){
-        countfuncstatic();
+    cout << "\nCalling Static Count Function" << endl;
+    for (int i = 0; i < 10; i++) {
+        countFuncStatic();
     }
 
     return 0;
 }
 
-/* Using a local static variable is generally more appropiate. It limits the scope of the
-variable to the function, avoiding unintended side effects elsewhere in the code. It also
-makes the function more self-contained and easier to manage.*/
+/* 
+Using a local static variable is generally more appropriate because it limits the scope
+of the variable to the function, preventing unintended side effects in other parts of the code.
+It keeps the function self-contained and more modular.
+*/
 
-/*A regilar local variable is reinitialized every time the function is called. This means
-that it won't be able to keep track of how many times the function has been called because
-it would reset to its initial value on each function call.*/
+/* 
+A regular local variable gets reinitialized every time the function is called. Hence, it cannot
+retain the count between function calls, resetting to its initial value each time.
+*/
